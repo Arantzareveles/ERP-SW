@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import productos.Productos;
 
 
@@ -58,6 +60,7 @@ public class DBHandler {
                 while (rs.next()) {
                     list.add(rs.getString("usuario"));
                     list.add(rs.getString("password"));
+                    list.add(rs.getString("rol"));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -367,4 +370,6 @@ public class DBHandler {
             }
         }
     }
+    
+ 
 }

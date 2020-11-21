@@ -75,6 +75,7 @@
                             
                         
                         <h:selectOneMenu class="form-control dato" value="#{appCompras.id_producto}">
+                            <f:selectItem itemValue = "---ID PRODUCTO---" itemLabel = "---ID PRODUCTO---" /> 
                             <f:ajax event="change" listener="#{appCompras.mostar}"></f:ajax> 
                             <c:forEach items="#{appCompras.listProducto}" var="code">
                                 <f:selectItem id="prod" itemValue="#{code.label}" itemLabel="#{code.label}"/>                          

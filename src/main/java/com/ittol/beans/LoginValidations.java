@@ -21,10 +21,20 @@ public class LoginValidations {
         System.out.println("list: " + list);
         return !list.isEmpty();
     }
+    
+    public String obtUser(String usuario, String password) throws ClassNotFoundException{
+        DBHandler handler = new DBHandler();
+        handler.getConnection();
+        List l = handler.executeQuery("SELECT * FROM usuarios where usuario='"+ usuario +"' AND password='"+password+"'");
+        String tipo=(String) l.get(2);
+        System.out.println("tipo: "+tipo);
+        return tipo;
+    }
 
-    //public static void main(String[] args) throws ClassNotFoundException {
-        //LoginValidations obj = new LoginValidations();
-      //obj.validate("erp", "12345");
-    //}
+    public static void main(String[] args) throws ClassNotFoundException {
+        LoginValidations obj = new LoginValidations();
+      obj.validate("erp", "12345");
+      obj.obtUser("erp", "12345");
+    }
 
 }

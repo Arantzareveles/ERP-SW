@@ -39,13 +39,22 @@ public class Login implements Serializable {
     
     
    // *******Cambio de Login****************
-    public String process() throws ClassNotFoundException {
+   public String process() throws ClassNotFoundException {
+        
         if (new LoginValidations().validate(usuario, password)) {
-            return "/Clientes/clientes.xhtml";
-       } else {
-            FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Usuario o Password Incorrecto",null);
+           
+            if (new LoginValidations().obtUser(usuario, password).equals("user")) {
+                return "Clientes/clientes.xhtml";
+                //return "user/agr_user.xhtml";
+            }else {
+             return "Administrador/administrador.xhtml";
+            }
+            
+        } else {
+            FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_ERROR,"Usuario o contraseña incorrectos", null);
             FacesContext.getCurrentInstance().addMessage(null, fm);
-            return "index.xhtml";
+            return "../index.xhtml";
         }
+        
     }
 }

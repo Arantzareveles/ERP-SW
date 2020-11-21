@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Hello from Facelets
+        <h1>Bienvenido ---- </h1>
+        
+        <nav>
+            <span class="title">Módulo ERP</span>
+            <div class="listas">
+                 <ul class="nav">
+                      <h:form class="navf">
+                       <li><h:commandLink action="/Clientes/clientes.xhtml" class="navli">Clientes</h:commandLink> </li>
+                       <li><h:commandLink action="/Productos/productos.xhtml" class="navli">Productos</h:commandLink> </li>
+                       <li><h:commandLink action="/Proveedores/proveedores.xhtml" class="navli">Proveedores</h:commandLink> </li>
+                       <li><h:commandLink action="/Pedidos/pedidos.xhtml" class="navli">Pedidos</h:commandLink> </li>
+                       <li><h:commandLink action="/Ventas/ventas.xhtml" class="navli">Ventas</h:commandLink> </li>
+                       <li><h:commandLink action="/Compras/compras.xhtml" class="navli">Compras</h:commandLink> </li>
+                       
+                        <!-- <li><h:commandLink action="Producto/Agregar_producto.xhtml" class="navli">Productos</h:commandLink></li>
+                         <li><h:commandLink action="pedidos.xhtml" class="navli">Pedido</h:commandLink> </li>
+                        -->
+                          
+                    </h:form>
+                 
+                
+            </ul>
+           <ul class="sesion">
+                <h:form class="navf">
+                    <li><a href="../index.xhtml"><font color="white">Cerrar Sesión</font></a></li>
+                </h:form>
+            </ul>
+            </div>
+            
+           
+        </nav>
+    </h:body>
+</html>
+
