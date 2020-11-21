@@ -1,0 +1,72 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14-oct-2020, 13:59:23
+    Author     : salvador
+*/
+body{
+    background-color: rgb(242, 242, 242);
+}
+
+
+.c-margin {
+    height: 90vh;
+    width: 90%;
+    margin: 30px 20px;
+}
+.c-padding {
+    display: table;
+    height: 100%;
+    width: 100%;
+    padding: 20px 20px;
+}
+
+.form-g {
+    width: 100%;
+    padding: 30px 40px;
+    display: table-cell;
+    vertical-align: middle;
+    box-shadow: 1px 1px 10px 1px;
+    background-color: white;
+}
+
+.form-message {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 60px;
+    color: rgb(48, 63, 149);
+}
+
+
+.div_body{
+    text-align: center;
+    height: 100%;
+    width: 85%;
+    margin: 0 auto;/*esto fue lo que se agregó*/
+}
+
+.div_image{
+    padding-top: 190px;
+}
+
+.div_rigth{
+    text-align: right;
+}
+
+.div_form{
+    margin: 0 auto;
+    width: 35%;
+    padding: 70px 50px;
+    background-color: rgba(33, 22, 22);
+}
+
+.color-label{
+    color: rgb(145, 10, 48);
+}
+
+.color-label-correct{
+    color: rgb(45, 182, 64);
+}

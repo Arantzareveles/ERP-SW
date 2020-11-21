@@ -1,0 +1,108 @@
+body{
+    background-color: rgb(242, 242, 242);
+}
+
+.div-nav{
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    color: white;
+}
+
+.colums-div{
+    display: grid;
+    width: 100%;
+    box-sizing: content-box;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+}
+
+.div-body{
+    padding: 20px;
+    width: 100%;
+    background-color: rgba(238, 243, 247);
+    height: auto;
+}
+
+.item-div{
+    height: auto;
+    box-sizing: content-box;
+    padding: 5px;
+}
+
+
+.item-head{
+    background-color: rgba(26, 25, 25, 1);
+    color: white;
+}
+
+.item-provider{
+    background-color: rgba(61, 59, 59, 1);
+    color: white;
+}
+
+.div-table{
+    background-color: rgb(238, 243, 247);
+    width: auto;
+    box-shadow: 0px 0px 2px 1px;
+}
+
+.table-cell{
+    text-align: center;
+    padding: 10px; 
+}
+
+.table-option{
+    background-color: rgb(238, 243, 247);
+    
+}
+
+.table-option:hover{
+    background-color: rgb(190, 196, 201);
+    transition: 1000ms;
+}
+
+.table-line{
+    border-bottom: 1px solid black;
+}
+
+.border-image{
+    border: 8px solid;
+    border-color: rgb(169, 171, 170);
+}
+
+.item-div a{
+    padding-right: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.item-div a:hover{
+    color: rgba(255, 255, 255, 0.4);
+    transition: 400ms;
+}
+
+.button-nav{
+    border-radius: 6px;
+    height: auto;
+    border: none;
+}
+
+.div-father{
+    height: 100%;
+    display: table;
+    box-sizing: content-box;
+}
+
+.div-child{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.div-fotter{
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: auto;
+    color: white;
+}

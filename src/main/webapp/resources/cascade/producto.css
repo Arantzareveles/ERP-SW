@@ -1,0 +1,14 @@
+.item-porducto-div{
+    height: auto;
+    box-sizing: content-box;
+    padding: 20px;
+}
+
+.div-back{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.item-table{
+        background-color: rgba(107, 193, 164, 0.8);
+        color: white;
+}

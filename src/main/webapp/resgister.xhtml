@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <h:outputStylesheet library="cascade" name="bootstrap.min.css"></h:outputStylesheet>
+        <h:outputStylesheet library="cascade" name="login.css"></h:outputStylesheet>
+        <h:outputScript library="javascript" name="registerJs.js"></h:outputScript>
+    </h:head>
+    <h:body onload="inicio()">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">ERP </a>
+            <a class="navbar-brand" align="rigth">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Registro de Usuarios</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        </nav>  
+        <div class="row">
+            <div class="col c-margin">
+                <div class="c-padding">
+                    <div class="form-g">
+                        <h:form id="form-regi">
+                            <h3 style="text-align: center">Formulario</h3>
+                            <br/>
+                            <h:inputText id="regi-nombre" class="form-control" onkeyup="validateNombre()" p:placeholder="Ingresa Nombre" value="#{appregister.nombre}"/>
+                            <h:outputLabel id="lab-nombre" class="color-label"><small>Debe contener almenos 3 caracteres</small></h:outputLabel>
+                            <br/>
+                            <div class="form-row">
+                                <div class="col">
+                                    <h:inputText id="regi-apat" class="form-control"  onkeyup="validateApell()" p:placeholder="Ingresa Apellido Paterno" value="#{appregister.apat}"/>
+                                    <h:outputLabel id="lab-apat" class="color-label" ><small>Debe contener almenos 4 caracteres</small></h:outputLabel>
+                                </div>
+                                <div class="col">
+                                    <h:inputText id="regi-amat" class="form-control"  onkeyup="validateApellM()" p:placeholder="Ingresa Apellido Materno" value="#{appregister.amat}"/>
+                                    <h:outputLabel id="lab-amat" class="color-label" ><small>Debe contener almenos 4 caracteres</small></h:outputLabel>
+                                </div>
+                                                        
+                            </div>
+                            <br/><!-- comment -->
+                             <h:inputText id="regi-usuario" class="form-control"  onkeyup="validateUser()" p:placeholder="Ingresa Usuario" value="#{appregister.usuario}"/>
+                                    <h:outputLabel id="lab-usuario" class="color-label" ><small>Debe contener almenos 4 caracteres</small></h:outputLabel>
+                            <br/>
+                            <h:inputText id="regi-pass" class="form-control" onkeyup="validatePassword()" p:placeholder="Ingresa Contraseña" value="#{appregister.pass}"/>
+                            <h:outputLabel id="lab-cont" class="color-label"><small>Debe contener almenos 5 caracteres</small></h:outputLabel>
+                            <br/>
+                            <h:inputText id="regi-pass2" class="form-control" onkeyup="confirmPassword()" p:placeholder="Ingresa Contraseña"/>
+                            <h:outputLabel id="lab-cont2" class="color-label-correct"><small>La contraseña coincide</small></h:outputLabel>
+                            <br/>
+                            <h:inputText id="regi-rol" class="form-control" onkeyup="validateRol()" p:placeholder="Ingresa Rol" value="#{appregister.rol}"/>
+                            <h:outputLabel id="lab-rol" class="color-label"><small>Superusuario o Usuario</small></h:outputLabel>
+                            <br/>
+                            <div class="div_rigth">
+                                <a href="index.xhtml" style="text-align: left;">Iniciar Sesión</a>
+                                <br/><br/>
+                            </div>
+                            <h:commandButton id="bt-regis" value="#{appregister.tag}" class="btn #{appregister.invalid}  btn-block" action="#{appregister.inserta}"  disabled="false"></h:commandButton>
+                        </h:form>
+                    </div>    
+                </div>    
+            </div>
+            <div class="col c-margin">
+                <div class="c-padding">
+                    <div class="form-message">
+                        <p style="font-size: 50px; margin-top: -30px;"><strong>REGISTRAR <br/>UN NUEVO USUARIO</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </h:body>
+</html>
+
