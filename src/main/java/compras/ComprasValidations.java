@@ -31,12 +31,27 @@ public class ComprasValidations {
         System.out.println("Pedido list: "+lst);
         return lst;
     } 
+  
+  public List precio(int id_producto) throws ClassNotFoundException{
+      DBHandler handler = new DBHandler();
+      handler.getConnection();
+        List l=handler.PrecioProd("SELECT precio FROM productos WHERE id_producto ='"+id_producto+"'");
+        
+        double precio= (double) l.get(0);
+        System.out.println(precio);
+        return l;
+  }
      
-      public void InsertCompras(int id_compras,String fecha_compra,String fecha_entrega,int id_producto,int id_prov,int cantidad,Double total,String status) throws ClassNotFoundException{
+      public void InsertCompras(String fecha_compra,String fecha_entrega,int id_producto,int id_prov,int cantidad) throws ClassNotFoundException{
         DBHandler handler = new DBHandler();
         handler.getConnection();
-        handler.executeInsert("INSERT INTO compras(id_compras,fecha_compra,fecha_entrega,id_producto,id_prov,cantidad,total,status) "+ 
-        "VALUES('"+id_compras+"','"+fecha_compra+"','"+fecha_entrega+"','"+id_producto+"','"+id_prov+"','"+cantidad+"','"+total+"','"+status+"')");
+        String status="0";
+        List l=handler.PrecioProd("SELECT precio FROM productos WHERE id_producto ='"+id_producto+"'");
+        double precio= (double) l.get(0);
+        double total=precio*cantidad;
+        
+        handler.executeInsert("INSERT INTO compras(fecha_compra,fecha_entrega,id_producto,id_prov,cantidad,total,status) "+ 
+        "VALUES('"+fecha_compra+"','"+fecha_entrega+"','"+id_producto+"','"+id_prov+"','"+cantidad+"','"+total+"','"+status+"')");
     }
       
       public List listaCompras() throws ClassNotFoundException{
@@ -47,8 +62,9 @@ public class ComprasValidations {
         return lst;
     } 
      
-     //public static void main(String[] args) throws ClassNotFoundException {
-        //VentasValidations obj = new VentasValidations();
-        ///obj.ClientesGetId();
-    //}  
+     public static void main(String[] args) throws ClassNotFoundException {
+        /*ComprasValidations obj = new ComprasValidations();
+        obj.InsertCompras(5,"2020/11/22", "2020/11/22", 3, 2, 12);*/
+       
+    }  
 }

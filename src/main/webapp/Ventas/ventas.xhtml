@@ -65,9 +65,7 @@
                 <h:form class="fdatos">
                     <h:messages  warnStyle="color:red" errorStyle="color:black" infoStyle="Registro Correcto"/>
                     <div class="datos_ven">
-                        <h:inputText class="form-control dato" autocomplete="off" a:placeholder="Codigo" value="#{appVentas.id_venta}" required="true" requiredMessage="Ingrese ID">
-                        </h:inputText>
-                        
+                       
                         <h:selectOneMenu class="form-control dato" value="#{appVentas.id_pedido}">
                             <f:ajax event="change" listener="#{appVentas.mostar}"></f:ajax> 
                             <c:forEach items="#{appVentas.listPedidos}" var="code">

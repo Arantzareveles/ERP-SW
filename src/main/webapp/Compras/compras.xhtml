@@ -66,16 +66,16 @@
                 <h:form class="fdatos">
                     <h:messages  warnStyle="color:red" errorStyle="color:black" infoStyle="Registro Correcto"/>
                     <div class="datos_ven">
-                        <h:inputText class="form-control dato" autocomplete="off" a:placeholder="Codigo" value="#{appCompras.id_compras}" required="true" requiredMessage="Ingrese ID">
-                        </h:inputText>
+                       <!-- <h:inputText class="form-control dato" autocomplete="off" a:placeholder="Codigo" value="#{appCompras.id_compras}" required="true" requiredMessage="Ingrese ID">
+                        </h:inputText>-->
                         
-                        <h:inputText styleClass="form-control datepicker dato" autocomplete="off" a:placeholder="Fecha de Compra" value="#{appCompras.fecha_compra}" requiredMessage="Ingrese la Fecha de Compra"/>
+                      
                         <h:inputText styleClass="form-control datepicker dato" autocomplete="off" a:placeholder="Fecha de Entrega" value="#{appCompras.fecha_entrega}" requiredMessage="Ingrese la Fecha de Entrega"/>
                         
                             
                         
-                        <h:selectOneMenu class="form-control dato" value="#{appCompras.id_producto}">
-                            <f:selectItem itemValue = "---ID PRODUCTO---" itemLabel = "---ID PRODUCTO---" /> 
+                        <h:selectOneMenu class="form-control dato" value="#{appCompras.id_producto}" required="true" requiredMessage="Debe seleccionar un proveedor">
+                            <f:selectItem itemLabel = "---ID PRODUCTO---" /> 
                             <f:ajax event="change" listener="#{appCompras.mostar}"></f:ajax> 
                             <c:forEach items="#{appCompras.listProducto}" var="code">
                                 <f:selectItem id="prod" itemValue="#{code.label}" itemLabel="#{code.label}"/>                          
@@ -83,17 +83,17 @@
                         </h:selectOneMenu>
                        
       
-                            <h:selectOneMenu class="form-control dato" value="#{appCompras.id_prov}">
+                        <h:selectOneMenu class="form-control dato" value="#{appCompras.id_prov}" required="true"  requiredMessage="Debe seleccionar un producto">
+                                 <f:selectItem itemLabel = "---ID PROVEEDOR---" /> 
                             <f:ajax event="change" listener="#{appCompras.mostarId}"></f:ajax> 
                             <c:forEach items="#{appCompras.listProveedor}" var="code">
                                 <f:selectItem id="provee" itemValue="#{code.label}" itemLabel="#{code.label}"/>                          
                             </c:forEach>
                         </h:selectOneMenu>
                         
-                            <h:inputText class="form-control dato" autocomplete="off" a:placeholder="Cantidad" value="#{appCompras.cantidad}" required="true" requiredMessage="Ingrese la Cantidad"/>
-                            <h:inputText class="form-control dato" autocomplete="off" a:placeholder="Total" value="#{appCompras.total}" required="true" requiredMessage="Ingrese el Total"/>
-                        <h:inputText class="form-control dato" autocomplete="off" a:placeholder="Status" value="#{appCompras.status}" required="true" requiredMessage="Ingrese Status">
-                        </h:inputText>       
+                            <h:inputText class="form-control dato" autocomplete="off" maxlength="3"  a:placeholder="Cantidad" value="#{appCompras.cantidad}" required="true" requiredMessage="Ingrese la Cantidad"/>
+                          
+                            
                     </div>
                    
                     <div class="botonagr">

@@ -7,6 +7,8 @@ package compras;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -163,73 +165,74 @@ public class Compras implements Serializable {
 
     //validaciones
     public void agrCompras() throws ClassNotFoundException {
+         //fecha del sistema
+         Calendar fech = new GregorianCalendar();
+         String año = String.valueOf(fech.get(Calendar.YEAR));
+         String mes = String.valueOf(fech.get(Calendar.MONTH) + 1);
+         String dia = String.valueOf(fech.get(Calendar.DAY_OF_MONTH));
+         String fechaS = año + "/" + mes + "/" + dia;
+         
+         //fecha ingresada por el usuario
+          String anio=fecha_entrega.substring(0,4);
+          String mesU=fecha_entrega.substring(5,7);
+          String diaU=fecha_entrega.substring(8,10);
+          int añoEnt= Integer.parseInt(anio) -Integer.parseInt(año);
 
-        Pattern p = Pattern.compile("[0-1]{1}");
-        Matcher stat = p.matcher(status);
+        
 
-        Pattern i = Pattern.compile("[0-9]");
-        Matcher id = i.matcher(id_compras);
-        Matcher idpd = i.matcher(id_producto);
-        Matcher idpv = i.matcher(id_prov);
+        Pattern i = Pattern.compile("[0-9]+");
         Matcher can = i.matcher(cantidad);
 
-        Pattern tot = Pattern.compile("([0-9].){1,4}$");
-        Matcher tota = tot.matcher(total);
+        
 
-        if (id_compras.equals("")) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo ID esta vacio", null);
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (!id.matches()) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo ID solo puede contener números", null);
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (fecha_compra.equals("")) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo FECHA COMPRA esta vacio", null);
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (fecha_entrega.equals("")) {
+        if (fecha_entrega.equals("")) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo FECHA ENTREGA esta vacio", null);
             FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (id_producto.equals("")) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo ID PRODUCTO esta vacio", null);
+        }else if (Integer.parseInt(anio) < Integer.parseInt(año)) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El año no pude ser menor al año actual", null);
             FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (!idpd.matches()) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo ID PRODUCTO solo puede contener números", null);
+        } else if (Integer.parseInt(anio) == Integer.parseInt(año) && Integer.parseInt(mesU) < Integer.parseInt(mes)) {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El mes no pude ser menor al mes actual", null);
             FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (id_prov.equals("")) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo ID PROVEEDOR esta vacio", null);
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (!idpv.matches()) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo ID PROVEEDOR solo puede contener números", null);
+        } else if (Integer.parseInt(anio) == Integer.parseInt(año) && Integer.parseInt(mesU) == Integer.parseInt(mes)) {
+            if (Integer.parseInt(diaU) <= Integer.parseInt(dia)) {
+                //System.out.println("El dia no pude der menor al actual");
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El dia no pude der menor o igual al actual", null);
+                FacesContext.getCurrentInstance().addMessage(null, fm);
+
+            } else {
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Pedido registrado correctamente", null);
+                FacesContext.getCurrentInstance().addMessage(null, fm);
+                int cant = Integer.parseInt(cantidad);
+                int idprove = Integer.parseInt(id_prov);
+                int idprod = Integer.parseInt(id_producto);
+
+                new ComprasValidations().InsertCompras(fechaS, fecha_entrega, idprod, idprove, cant);
+
+            }
+        } else if (añoEnt > 1) {
+            //System.out.println("Los pedidos solo pueden ralizarse a un maximo de un año");
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Los pedidos solo pueden ralizarse a un maximo de un año", null);
             FacesContext.getCurrentInstance().addMessage(null, fm);
         } else if (cantidad.equals("")) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo CANTIDAD esta vacio", null);
             FacesContext.getCurrentInstance().addMessage(null, fm);
+        }else if(cantidad.length()>3){
+             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo CANTIDAD no puede contener mas de 3 digitos", null);
+            FacesContext.getCurrentInstance().addMessage(null, fm);
         } else if (!can.matches()) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo CANTIDAD no puede contener caracteres especiales", null);
             FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (total.equals("")) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo TOTAL esta vacio", null);
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (!tota.matches()) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo TOTAL no puede contener caracteres especiales", null);
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (status.equals("")) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo STATUS esta vacio", null);
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (!stat.matches()) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo STATUS solo puede contener 1 o 0 ", null);
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-
         } else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Compra AGREGADA correctamente", null);
             FacesContext.getCurrentInstance().addMessage(null, fm);
 
-            int idcom = Integer.parseInt(id_compras);
+            //int idcom = Integer.parseInt(id_compras);
             int cant = Integer.parseInt(cantidad);
-            double totalc = Double.parseDouble(total);
             int idprove = Integer.parseInt(id_prov);
             int idprod = Integer.parseInt(id_producto);
 
-            new ComprasValidations().InsertCompras(idcom, fecha_compra, fecha_entrega, idprod, idprove, cant, totalc, status);
+            new ComprasValidations().InsertCompras(fechaS, fecha_entrega, idprod, idprove, cant);
 
         }
     }

@@ -31,11 +31,11 @@ public class VentasValidations {
         return lst;
     } 
      
-      public void InsertVenta(int id_venta,int id_pedido,String fecha_entrega,int id_clien,Double total,String status) throws ClassNotFoundException{
+      public void InsertVenta(int id_pedido,String fecha_entrega,int id_clien,Double total,String status) throws ClassNotFoundException{
         DBHandler handler = new DBHandler();
         handler.getConnection();
-        handler.executeInsert("INSERT INTO ventas(id_venta,id_pedido,fecha_entrega,id_cliente,total,status) "+ 
-        "VALUES('"+id_venta+"','"+id_pedido+"','"+fecha_entrega+"','"+id_clien+"','"+total+"','"+status+"')");
+        handler.executeInsert("INSERT INTO ventas(id_pedido,fecha_entrega,id_cliente,total,status) "+ 
+        "VALUES('"+id_pedido+"','"+fecha_entrega+"','"+id_clien+"','"+total+"','"+status+"')");
     }
       
       public List listaVentas() throws ClassNotFoundException{

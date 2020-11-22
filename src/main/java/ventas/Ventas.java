@@ -143,8 +143,8 @@ public class Ventas implements Serializable {
 
     public void agrVenta() throws ClassNotFoundException {
 
-        Pattern i = Pattern.compile("[0-9]");
-        Matcher id = i.matcher(id_venta);
+        Pattern i = Pattern.compile("[0-9]+");
+        
         Matcher idp = i.matcher(id_pedido);
         Matcher idc = i.matcher(id_clien);
 
@@ -154,13 +154,7 @@ public class Ventas implements Serializable {
         Pattern tot = Pattern.compile("([0-9].){1,4}$");
         Matcher tota = tot.matcher(total);
 
-        if (id_venta.equals("")) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo ID esta vacio", null);
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (!id.matches()) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo ID solo puede contener números", null);
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-        } else if (id_pedido.equals("")) {
+         if (id_pedido.equals("")) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo ID PEDIDO esta vacio", null);
             FacesContext.getCurrentInstance().addMessage(null, fm);
         } else if (!idp.matches()) {
@@ -192,12 +186,12 @@ public class Ventas implements Serializable {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Venta AGREGADA correctamente", null);
             FacesContext.getCurrentInstance().addMessage(null, fm);
 
-            int idven = Integer.parseInt(id_venta);
+           
             double totalv = Double.parseDouble(total);
             int idcli = Integer.parseInt(id_clien);
             int idped = Integer.parseInt(id_pedido);
 
-            new VentasValidations().InsertVenta(idven, idped, fecha_entrega, idcli, totalv, status);
+            new VentasValidations().InsertVenta(idped, fecha_entrega, idcli, totalv, status);
 
         }
          
