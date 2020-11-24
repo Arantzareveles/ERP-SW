@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" ></link>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"></link>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous"></link>
+    <link rel="stylesheet" href="../styles.css"></link>
+    <h:head>
+        <title>ERP</title>
+    </h:head>
+    <h:body>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js" />
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        
+        <nav>
+            <span class="title">Módulo ERP</span>
+            <div class="listas">
+                 <ul class="nav">
+                      <h:form class="navf">
+                       <li><h:commandLink action="/Clientes/clientes.xhtml" class="navli">Clientes</h:commandLink> </li>
+                       <li><h:commandLink action="/Productos/productos.xhtml" class="navli">Productos</h:commandLink> </li>
+                       <li><h:commandLink action="/Proveedores/proveedores.xhtml" class="navli">Proveedores</h:commandLink> </li>
+                       <li><h:commandLink action="/Pedidos/pedidos.xhtml" class="navli">Pedidos</h:commandLink> </li>
+                       <li><h:commandLink action="/Ventas/ventas.xhtml" class="navli">Ventas</h:commandLink> </li>
+                       <li><h:commandLink action="/Compras/compras.xhtml" class="navli">Compras</h:commandLink> </li>
+                       
+                        <!-- <li><h:commandLink action="Producto/Agregar_producto.xhtml" class="navli">Productos</h:commandLink></li>
+                         <li><h:commandLink action="pedidos.xhtml" class="navli">Pedido</h:commandLink> </li>
+                        -->
+                          
+                    </h:form>
+                 
+                
+            </ul>
+           <ul class="sesion">
+                <h:form class="navf">
+                    <li><a href="../index.xhtml"><font color="white">Cerrar Sesión</font></a></li>
+                </h:form>
+            </ul>
+            </div>
+            
+           
+        </nav>
+        
+        <div class="contenedor">
+            <div class="menu-lateral">
+                <ul class="menu-prov">
+                    <h:form class=""> 
+                    <li><h:commandLink action="/Compras/compras.xhtml" class="navli">Agregar Nueva Compras</h:commandLink> </li>
+                    <li><h:commandLink action="#{appCompras.process}" class="navli">Lista de Compras</h:commandLink> </li>
+                    </h:form>
+                </ul>
+                
+                
+            </div>
+            
+             <div class="contenido">
+                <h1>Agregar Compra</h1>
+                <h:form class="fdatos">
+                    <h:messages  warnStyle="color:red" errorStyle="color:black" infoStyle="Registro Correcto"/>
+                    <div class="datos_ven">
+                       <!-- <h:inputText class="form-control dato" autocomplete="off" a:placeholder="Codigo" value="#{appCompras.id_compras}" required="true" requiredMessage="Ingrese ID">
+                        </h:inputText>-->
+                        
+                      
+                        <h:inputText styleClass="form-control datepicker dato" autocomplete="off" a:placeholder="Fecha de Entrega" value="#{appCompras.fecha_entrega}" requiredMessage="Ingrese la Fecha de Entrega"/>
+                        
+                            
+                        
+                        <h:selectOneMenu class="form-control dato" value="#{appCompras.id_producto}" required="true" requiredMessage="Debe seleccionar un proveedor">
+                            <f:selectItem itemLabel = "---ID PRODUCTO---" /> 
+                            <f:ajax event="change" listener="#{appCompras.mostar}"></f:ajax> 
+                            <c:forEach items="#{appCompras.listProducto}" var="code">
+                                <f:selectItem id="prod" itemValue="#{code.label}" itemLabel="#{code.label}"/>                          
+                            </c:forEach>
+                        </h:selectOneMenu>
+                       
+      
+                        <h:selectOneMenu class="form-control dato" value="#{appCompras.id_prov}" required="true"  requiredMessage="Debe seleccionar un producto">
+                                 <f:selectItem itemLabel = "---ID PROVEEDOR---" /> 
+                            <f:ajax event="change" listener="#{appCompras.mostarId}"></f:ajax> 
+                            <c:forEach items="#{appCompras.listProveedor}" var="code">
+                                <f:selectItem id="provee" itemValue="#{code.label}" itemLabel="#{code.label}"/>                          
+                            </c:forEach>
+                        </h:selectOneMenu>
+                        
+                            <h:inputText class="form-control dato" autocomplete="off" maxlength="3"  a:placeholder="Cantidad" value="#{appCompras.cantidad}" required="true" requiredMessage="Ingrese la Cantidad"/>
+                          
+                            
+                    </div>
+                   
+                    <div class="botonagr">
+                        <h:commandButton class="btn btn-primary agrPed" value="Agregar" action="#{appCompras.agrCompras()}" />
+                    </div>
+                    
+                </h:form>
+        <script type="text/javascript" language="javascript">
+                    $(document).ready(function () {
+                        $(".datepicker").datepicker({
+                            dateFormat: 'yy/mm/dd',
+                            changeMonth: true,
+                            changeYear: true,
+                            yearRange: '2000:2020'
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </h:body>
+ </html>
+
